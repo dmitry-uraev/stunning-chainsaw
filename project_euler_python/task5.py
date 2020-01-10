@@ -1,24 +1,20 @@
 """
-a palindromic number reads the same both ways.
-the largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
 
-find the largest palindrome made from the product of two 3-digit numbers.
+what is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 """
 
 
-def _check_palindrome(number: int) ->bool:
-    if str(number) == str(number)[::-1]:
-        return True
-
-
-def palindrome(num=3) ->int:
-    start, end, boarders, all_ = '1', '10', [], []
-    for n in range(num-1):
-        start, end = start + '0', end + '0'
-    boarders.append(int(start)), boarders.append(int(end))
-    for n in range(boarders[-1], boarders[0], -1):
-        for n_ in range(boarders[-1], boarders[0], -1):
-            if _check_palindrome(n * n_):
-                all_.append(n * n_)
-    return max(all_)
-
+def divide_range(number1: int, number2: int) ->int:
+    number = number2 * number2
+    non_stop = True
+    while non_stop:
+        number += 10
+        for element in range(number1, number2):
+            if number % element == 0:
+                non_stop = False
+            else:
+                non_stop = True
+                break
+    return number  # 1-20 = 232792560 - long processing # 1-10 = 2520 works just fine;
+#  quite quick if i+=10 not i+=1 - reasonable;
